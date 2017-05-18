@@ -3,6 +3,8 @@ package com.example.episodicusers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserService {
@@ -14,7 +16,7 @@ public class UserService {
         return repository.save(user);
     }
 
-    public Iterable<User> read() {
+    public List<User> read() {
         return repository.findAll();
     }
 

@@ -2,6 +2,8 @@ package com.example.episodicusers;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -13,7 +15,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Iterable<User> read() {
+    public List<User> read() {
         return userService.read();
     }
 
