@@ -1,4 +1,4 @@
-package com.example.episodicshows;
+package com.example.episodicusers;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +12,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public Iterable<User> read() {
+        return userService.read();
+    }
+
     @GetMapping(value = "/{userId}")
     public User read(@PathVariable Long userId) {
-        return userService.read(userId);
+        return userService.readOne(userId);
     }
 
     @PostMapping
