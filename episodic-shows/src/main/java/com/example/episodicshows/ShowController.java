@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+
 @RestController
 @RequestMapping("/shows")
 public class ShowController {
@@ -11,6 +13,7 @@ public class ShowController {
     private final ShowService showService;
 
     public ShowController(ShowService showService) {
+        assertNotNull(showService);
         this.showService = showService;
     }
 
@@ -19,7 +22,7 @@ public class ShowController {
         return showService.read();
     }
 
-    @GetMapping(value = "/{showId}")
+    @GetMapping("/{showId}")
     public Show read(@PathVariable Long showId) {
         return showService.readOne(showId);
     }

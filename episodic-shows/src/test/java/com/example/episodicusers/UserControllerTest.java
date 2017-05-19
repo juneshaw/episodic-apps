@@ -50,7 +50,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void postCreateWorks() throws Exception {
+	public void post() throws Exception {
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(mockedUser);
 		RequestBuilder request = MockMvcRequestBuilders
@@ -64,7 +64,7 @@ public class UserControllerTest {
 	}
 
 	@Test
-	public void read() throws Exception {
+	public void get() throws Exception {
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(users);
 		RequestBuilder request = MockMvcRequestBuilders
@@ -76,7 +76,7 @@ public class UserControllerTest {
 				 .andExpect(jsonPath("$[1].email", CoreMatchers.is(mockedUser2.getEmail())));
 	}
 	@Test
-	public void readOne() throws Exception {
+	public void getOne() throws Exception {
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(mockedUser);
 		RequestBuilder request = MockMvcRequestBuilders
