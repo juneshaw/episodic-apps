@@ -2,20 +2,18 @@ package com.example.episodicepisodes;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "episodes")
 @Getter
 @Setter
-@NoArgsConstructor(force = true)
+//@NoArgsConstructor(force = true)
 @AllArgsConstructor
 public class Episode {
+
+    public Episode() {}
 
     public Episode(Long showId,
                    Integer seasonNumber,
@@ -26,16 +24,16 @@ public class Episode {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column
+    @Column(name = "show_id")
     Long showId;
 
-    @Column
+    @Column(name = "season_number")
     Integer seasonNumber;
 
-    @Column
+    @Column(name = "episode_number")
     Integer episodeNumber;
 
 }
