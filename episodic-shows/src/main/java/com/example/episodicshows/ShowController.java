@@ -45,4 +45,11 @@ public class ShowController {
         return showService.create(show);
     }
 
+    @PostMapping("/{showId}/episodes")
+    public Episode postByShowId(@PathVariable Long showId,
+                                @RequestBody Episode episode) {
+        episode.setShowId(showId);
+        return episodeService.create(episode);
+    }
+
 }
