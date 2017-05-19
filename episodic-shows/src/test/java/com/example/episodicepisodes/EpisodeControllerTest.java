@@ -43,13 +43,12 @@ public class EpisodeControllerTest {
         Show show2 = new Show(2L, "Modern Family");
         episode1 =
                 new Episode(
-                        1L,
                         show1.getId(),
                         1,
                         2);
+
         episode2 =
                 new Episode(
-                        2L,
                         show2.getId(),
                         3,
                         4);

@@ -24,4 +24,8 @@ public class EpisodeService {
     public Episode read(Long episodeId) {
         return repository.findOne(episodeId);
     }
+
+    public List<Episode> readByShowId(Long showId) {
+        return repository.findByShowId(showId);
+    }
 }

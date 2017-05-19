@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EpisodeRepository extends CrudRepository<Episode, Long> {
     List<Episode> findAll();
-    Episode findByShowId(Long showId);
+    List<Episode> findByShowId(Long showId);
 }

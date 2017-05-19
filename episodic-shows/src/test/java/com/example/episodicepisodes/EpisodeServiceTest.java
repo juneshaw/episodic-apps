@@ -39,9 +39,9 @@ public class EpisodeServiceTest {
     @Test
     public void testCreate() {
         episodeService.create(episode1);
-        Episode retrievedEpisode = repository.findByShowId(episode1.getShowId());
+        List<Episode> retrievedEpisodes = repository.findByShowId(episode1.getShowId());
         assertThat(
-                retrievedEpisode,
+                retrievedEpisodes.iterator().next(),
                 equalTo(episode1));
     }
 
