@@ -15,4 +15,12 @@ public class DigitalProduct extends Product {
         super(sku, name, priceInCents);
         this.fileUrl = fileUrl;
     }
+
+    public String getName() {
+        return "media";
+    }
+
+    public String getProductCategory() {
+        return "media";
+    }
 }

@@ -15,4 +15,12 @@ public class StreamingProduct extends Product {
         super(sku, name, priceInCents);
         this.streamUrl = streamUrl;
     }
+
+    public String getName() {
+        return "stream";
+    }
+
+    public String getProductCategory() {
+        return "stream";
+    }
 }
