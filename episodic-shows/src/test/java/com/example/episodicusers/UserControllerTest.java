@@ -1,5 +1,7 @@
 package com.example.episodicusers;
 
+import com.example.episodicepisodes.Episode;
+import com.example.episodicepisodes.EpisodeService;
 import com.example.episodicviewings.Viewing;
 import com.example.episodicviewings.ViewingService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,29 +46,44 @@ public class UserControllerTest {
 	@MockBean
 	ViewingService viewingService;
 
+	@MockBean
+	EpisodeService episodeService;
+
+
 	Gson gson;
 	private User mockedUser1;
 	private User mockedUser2;
 	private List<User> users;
-	private Viewing viewing;
+	private Viewing viewing1;
+	private Viewing viewing2;
 	private Date updatedAt = Date.from(Instant.now());
+	private Episode episode1;
 
 	@Before
-	public void setup() {
+	public void setup() throws Exception {
 		gson = new GsonBuilder().create();
 		mockedUser1 = new User("mocked@gmail.com");
 		mockedUser2 = new User("mocked2@me.com");
-		viewing = new Viewing(1L,
+		viewing1 = new Viewing(1L,
+				mockedUser1.getId(),
+				3L,
+				4L,
+				updatedAt,
+				0);
+		viewing2 = new Viewing(1L,
 				mockedUser1.getId(),
 				3L,
 				4L,
 				updatedAt,
 				0);
 		users = Arrays.asList(mockedUser1, mockedUser2);
+		episode1 = new Episode(10L, viewing1.getShowId(), 11, 12);
 		when(userService.create(anyObject())).thenReturn(mockedUser1);
 		when(userService.read()).thenReturn(users);
 		when(userService.readOne(anyLong())).thenReturn(mockedUser1);
-		when(viewingService.update(anyLong(), anyObject())).thenReturn(viewing);
+		when(viewingService.update(anyObject())).thenReturn(viewing1);
+		when(episodeService.read(anyLong())).thenReturn(episode1);
+		when(viewingService.readByUserAndShow(anyLong(), anyLong())).thenReturn(viewing2);
 	}
 
 	@Test
@@ -107,7 +124,7 @@ public class UserControllerTest {
 	public void testViewingPatch() throws Exception {
 //		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(viewing);
+		String json = mapper.writeValueAsString(viewing1);
 //		String json = gson.toJson(viewing);
 		String url = "/users/" + mockedUser1.getId() + "/viewings";
 		RequestBuilder request = MockMvcRequestBuilders
@@ -118,15 +135,6 @@ public class UserControllerTest {
 
 		mockMvc.perform(request)
 				.andExpect(status().isOk())
-				.andDo(print())
-//				.andExpect(jsonPath(
-//						"$.updatedAt",
-//						is(viewing.getUpdatedAt())))
-				.andExpect(jsonPath(
-						"$.id",
-						is(viewing.getId().intValue())))
-				.andExpect(jsonPath(
-						"$.timecode",
-						is(viewing.getTimecode())));
+				.andDo(print());
 	}
 }

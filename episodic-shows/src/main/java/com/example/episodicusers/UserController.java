@@ -1,5 +1,7 @@
 package com.example.episodicusers;
 
+import com.example.episodicepisodes.Episode;
+import com.example.episodicepisodes.EpisodeService;
 import com.example.episodicviewings.Viewing;
 import com.example.episodicviewings.ViewingService;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +16,17 @@ public class UserController {
 
     private final UserService userService;
     private final ViewingService viewingService;
+    private final EpisodeService episodeService;
 
     public UserController(UserService userService,
-                          ViewingService viewingService) throws Exception {
+                          ViewingService viewingService,
+                          EpisodeService episodeService) throws Exception {
         assertNotNull(userService);
         assertNotNull(viewingService);
+        assertNotNull(episodeService);
         this.userService = userService;
         this.viewingService = viewingService;
+        this.episodeService = episodeService;
     }
 
     @GetMapping
@@ -39,8 +45,18 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/viewings")
-    public Viewing getViewing(@PathVariable Long userId,
+    public void updateViewing(@PathVariable Long userId,
                               @RequestBody Viewing viewing) throws Exception {
-        return viewingService.update(viewing);
+        Episode episode = episodeService.read(viewing.getEpisodeId());
+
+        Viewing foundViewing = viewingService.readByUserAndShow(
+                userId,
+                viewing.getShowId());
+
+        foundViewing.setUpdatedAt(viewing.getUpdatedAt());
+        foundViewing.setTimecode(viewing.getTimecode());
+
+        viewingService.update(viewing);
+        return;
     }
 }

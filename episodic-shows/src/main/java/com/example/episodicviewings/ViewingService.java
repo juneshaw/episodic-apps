@@ -29,22 +29,29 @@ public class ViewingService {
         return repository.findAll();
     }
 
+    public Viewing readByUserAndShow(Long userId,
+                                     Long showId) throws Exception {
+        return repository.findByUserIdAndShowId(userId, showId);
+    }
+
     public Viewing update(Viewing viewing) {
         return repository.save(viewing);
     }
-    public Viewing updateByUserAndShow(Viewing viewing) throws Exception {
-        Viewing newViewing = repository.findByUserIdAndShowId(
-                viewing.getUserId(),
-                viewing.getShowId());
-        if (newViewing!=null) {
-            newViewing.setEpisodeId(viewing.getEpisodeId());
-            newViewing.setUpdatedAt(viewing.getUpdatedAt());
-            newViewing.setTimecode(viewing.getTimecode());
-            return this.update(viewing);
-        } else {
-            return this.create(viewing);
-        }
-    }
+
+//    public Viewing updateByUserAndShow(Long userId,
+//                                       Long showId) throws Exception {
+//        Viewing newViewing = repository.findByUserIdAndShowId(
+//                userId,
+//                showId);
+//        if (newViewing!=null) {
+//            newViewing.setEpisodeId(viewing.getEpisodeId());
+//            newViewing.setUpdatedAt(viewing.getUpdatedAt());
+//            newViewing.setTimecode(viewing.getTimecode());
+//            return this.update(viewing);
+//        } else {
+//            return this.create(viewing);
+//        }
+//    }
 
     public void delete(Viewing viewing) throws Exception {
         repository.delete(viewing.getId());
