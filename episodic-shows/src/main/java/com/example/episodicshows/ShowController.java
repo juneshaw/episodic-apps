@@ -25,12 +25,12 @@ public class ShowController {
 
     @GetMapping
     public List<Show> readAll() {
-        return showService.read();
+        return showService.readAll();
     }
 
     @GetMapping("/{showId}")
     public Show read(@PathVariable Long showId) {
-        return showService.readOne(showId);
+        return showService.read(showId);
     }
 
     @GetMapping("/{showId}/episodes")

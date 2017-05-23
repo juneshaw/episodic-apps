@@ -41,7 +41,14 @@ public class ViewingService {
         return updatedViewing;
     }
 
-    public void delete(Viewing viewing) throws Exception {
-        repository.delete(viewing.getId());
+    public void delete(Long viewingId) throws Exception {
+        repository.delete(viewingId);
+    }
+
+    public List<Viewing> getRecentViewings(Long userId) throws Exception {
+        return repository.findAllByUserIdOrderByUpdatedAt(userId);
+    }
+    public Long count() {
+        return repository.count();
     }
 }

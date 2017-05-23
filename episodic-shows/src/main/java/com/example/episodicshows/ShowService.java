@@ -15,11 +15,11 @@ public class ShowService {
         return repository.save(show);
     }
 
-    public Show readOne(Long id) {
+    public Show read(Long id) {
         return repository.findOne(id);
     }
 
-    public List<Show> read() {
+    public List<Show> readAll() {
         return repository.findAll();
     }
 

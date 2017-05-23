@@ -58,8 +58,8 @@ public class ShowControllerTest {
         show2 = new Show("test show 2");
         shows = Arrays.asList(show1, show2);
         when(showService.create(anyObject())).thenReturn(show1);
-        when(showService.read()).thenReturn(shows);
-        when(showService.readOne(anyLong())).thenReturn(show1);
+        when(showService.readAll()).thenReturn(shows);
+        when(showService.read(anyLong())).thenReturn(show1);
 
         Integer seasonNumber1 = 1;
         Integer episodeNumber1 = 2;

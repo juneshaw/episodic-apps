@@ -1,8 +1,6 @@
 package com.example.episodicusers;
 
-import com.example.episodicepisodes.Episode;
 import com.example.episodicepisodes.EpisodeService;
-import com.example.episodicviewings.Viewing;
 import com.example.episodicviewings.ViewingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,17 +40,5 @@ public class UserController {
     @PostMapping
     public User create(@RequestBody User user) throws Exception {
         return userService.create(user);
-    }
-
-    @PostMapping("/{userId}/viewings")
-    public void updateViewing(@PathVariable Long userId,
-                              @RequestBody Viewing viewing) throws Exception {
-
-        Episode episode = episodeService.read(viewing.getEpisodeId());
-        viewing.setShowId(episode.getShowId());
-        viewing.setEpisodeId(episode.getId());
-        viewingService.update(viewing);
-
-        return;
     }
 }

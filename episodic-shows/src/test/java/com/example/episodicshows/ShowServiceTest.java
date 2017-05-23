@@ -55,7 +55,7 @@ public class ShowServiceTest {
     public void testReadAll() {
         repository.save(mockedShow);
         repository.save(mockedShow2);
-        List<Show> shows = showService.read();
+        List<Show> shows = showService.readAll();
 
         Iterator<Show> showIterator = shows.listIterator();
         assertThat(shows.size(), equalTo(2));
@@ -73,7 +73,7 @@ public class ShowServiceTest {
     @Rollback
     public void testReadOne() {
         Show savedShow = repository.save(mockedShow);
-        Show retrievedShow = showService.readOne(savedShow.getId());
+        Show retrievedShow = showService.read(savedShow.getId());
         assertThat(retrievedShow, is(notNullValue()));
         assertThat(retrievedShow.getName(), equalTo(savedShow.getName()));
     }

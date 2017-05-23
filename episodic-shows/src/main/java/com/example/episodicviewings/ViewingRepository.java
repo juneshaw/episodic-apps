@@ -7,4 +7,5 @@ import java.util.List;
 public interface ViewingRepository extends CrudRepository<Viewing, Long> {
     List<Viewing> findAll();
     Viewing findByUserIdAndShowId(Long userId, Long showId);
+    List<Viewing> findAllByUserIdOrderByUpdatedAt(Long userId);
 }
