@@ -11,23 +11,25 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 @Configuration
 public class AmqpListener implements RabbitListenerConfigurer {
 
-    @RabbitListener(queues = "my-queue-2")
+    @RabbitListener(queues = "episodic-progress")
+//    @Transactional
     public void receiveMessage(final HelloMessage message) {
+
         System.out.println("************************************************");
         System.out.println(message.toString());
         System.out.println("************************************************");
+//        someRepository.save(message);
     }
 
     @Bean
-    public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() { // <-- 2
+    public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
         DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
         factory.setMessageConverter(new MappingJackson2MessageConverter());
         return factory;
     }
 
     @Override
-    public void configureRabbitListeners(final RabbitListenerEndpointRegistrar registrar) {  // <-- 3
+    public void configureRabbitListeners(final RabbitListenerEndpointRegistrar registrar) {
         registrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
     }
-
 }
