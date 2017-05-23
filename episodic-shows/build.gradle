@@ -37,6 +37,7 @@ dependencies {
 	compile "org.flywaydb:flyway-core:4.2.0"
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-joda:2.9.0.pr3')
+	compile('org.springframework.boot:spring-boot-starter-amqp')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
 	compileOnly('org.projectlombok:lombok')
