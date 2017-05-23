@@ -47,16 +47,12 @@ public class UserController {
     @PostMapping("/{userId}/viewings")
     public void updateViewing(@PathVariable Long userId,
                               @RequestBody Viewing viewing) throws Exception {
+
         Episode episode = episodeService.read(viewing.getEpisodeId());
-
-        Viewing foundViewing = viewingService.readByUserAndShow(
-                userId,
-                viewing.getShowId());
-
-        foundViewing.setUpdatedAt(viewing.getUpdatedAt());
-        foundViewing.setTimecode(viewing.getTimecode());
-
+        viewing.setShowId(episode.getShowId());
+        viewing.setEpisodeId(episode.getId());
         viewingService.update(viewing);
+
         return;
     }
 }

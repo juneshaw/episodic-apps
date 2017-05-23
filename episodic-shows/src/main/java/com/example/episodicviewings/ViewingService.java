@@ -13,45 +13,33 @@ public class ViewingService {
         this.repository = viewingRepository;
     }
 
-//    public Viewing findViewing(Long episodeId, Long UserId) {
-//
-//    }
     public Viewing create(Viewing viewing) throws Exception{
         return repository.save(viewing);
     }
 
     public Viewing read(Long viewingId) throws Exception {
-        Viewing viewing = repository.findOne(viewingId);
-        return viewing;
+        return repository.findOne(viewingId);
     }
 
-    public List<Viewing> readAll() {
+    public List<Viewing> readAll() throws Exception {
         return repository.findAll();
     }
 
-    public Viewing readByUserAndShow(Long userId,
-                                     Long showId) throws Exception {
-        return repository.findByUserIdAndShowId(userId, showId);
-    }
+    public Viewing update(Viewing viewing) throws Exception {
 
-    public Viewing update(Viewing viewing) {
-        return repository.save(viewing);
-    }
+        Viewing updatedViewing;
+        Viewing foundViewing = repository.findByUserIdAndShowId(
+                viewing.getUserId(), viewing.getShowId());
 
-//    public Viewing updateByUserAndShow(Long userId,
-//                                       Long showId) throws Exception {
-//        Viewing newViewing = repository.findByUserIdAndShowId(
-//                userId,
-//                showId);
-//        if (newViewing!=null) {
-//            newViewing.setEpisodeId(viewing.getEpisodeId());
-//            newViewing.setUpdatedAt(viewing.getUpdatedAt());
-//            newViewing.setTimecode(viewing.getTimecode());
-//            return this.update(viewing);
-//        } else {
-//            return this.create(viewing);
-//        }
-//    }
+        if (foundViewing != null) {
+            foundViewing.setUpdatedAt(viewing.getUpdatedAt());
+            foundViewing.setTimecode(viewing.getTimecode());
+            updatedViewing = repository.save(foundViewing);
+        } else {
+            updatedViewing = this.create(viewing);
+        }
+        return updatedViewing;
+    }
 
     public void delete(Viewing viewing) throws Exception {
         repository.delete(viewing.getId());

@@ -49,7 +49,6 @@ public class UserControllerTest {
 	@MockBean
 	EpisodeService episodeService;
 
-
 	Gson gson;
 	private User mockedUser1;
 	private User mockedUser2;
@@ -57,7 +56,11 @@ public class UserControllerTest {
 	private Viewing viewing1;
 	private Viewing viewing2;
 	private Date updatedAt = Date.from(Instant.now());
-	private Episode episode1;
+	private Episode episode1 = new Episode(
+			10L,
+			3L,
+			3,
+			4);
 
 	@Before
 	public void setup() throws Exception {
@@ -77,13 +80,11 @@ public class UserControllerTest {
 				updatedAt,
 				0);
 		users = Arrays.asList(mockedUser1, mockedUser2);
-		episode1 = new Episode(10L, viewing1.getShowId(), 11, 12);
 		when(userService.create(anyObject())).thenReturn(mockedUser1);
 		when(userService.read()).thenReturn(users);
 		when(userService.readOne(anyLong())).thenReturn(mockedUser1);
-		when(viewingService.update(anyObject())).thenReturn(viewing1);
 		when(episodeService.read(anyLong())).thenReturn(episode1);
-		when(viewingService.readByUserAndShow(anyLong(), anyLong())).thenReturn(viewing2);
+		when(viewingService.update(anyObject())).thenReturn(viewing1);
 	}
 
 	@Test
@@ -123,9 +124,9 @@ public class UserControllerTest {
 	@Test
 	public void testViewingPatch() throws Exception {
 //		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+//		String json = gson.toJson(viewing);
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(viewing1);
-//		String json = gson.toJson(viewing);
 		String url = "/users/" + mockedUser1.getId() + "/viewings";
 		RequestBuilder request = MockMvcRequestBuilders
 				.post(url)
