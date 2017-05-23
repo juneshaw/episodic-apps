@@ -30,11 +30,6 @@ public class ViewingController {
         this.showService = showService;
     }
 
-    @GetMapping
-    public List<Viewing> readAll() throws Exception {
-        return viewingService.readAll();
-    }
-
     @GetMapping("/{viewingId}")
     public Viewing read(@PathVariable Long viewingId) throws Exception {
         return viewingService.read(viewingId);

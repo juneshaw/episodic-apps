@@ -1,7 +1,5 @@
 package com.example.episodicusers;
 
-import com.example.episodicepisodes.EpisodeService;
-import com.example.episodicviewings.ViewingService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,18 +11,10 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 public class UserController {
 
     private final UserService userService;
-    private final ViewingService viewingService;
-    private final EpisodeService episodeService;
 
-    public UserController(UserService userService,
-                          ViewingService viewingService,
-                          EpisodeService episodeService) throws Exception {
+    public UserController(UserService userService) throws Exception {
         assertNotNull(userService);
-        assertNotNull(viewingService);
-        assertNotNull(episodeService);
         this.userService = userService;
-        this.viewingService = viewingService;
-        this.episodeService = episodeService;
     }
 
     @GetMapping
