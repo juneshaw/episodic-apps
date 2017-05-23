@@ -1,5 +1,6 @@
 package com.example.episodicepisodes;
 
+import com.example.TestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EpisodeServiceTest {
+public class EpisodeServiceTest extends TestBaseClass {
 
     @Autowired
     EpisodeRepository repository;

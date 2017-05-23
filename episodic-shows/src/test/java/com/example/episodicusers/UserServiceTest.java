@@ -1,5 +1,6 @@
 package com.example.episodicusers;
 
+import com.example.TestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserServiceTest {
+public class UserServiceTest extends TestBaseClass {
 
     @Autowired
     UserRepository repository;

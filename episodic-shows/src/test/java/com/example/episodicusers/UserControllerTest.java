@@ -1,6 +1,7 @@
 package com.example.episodicusers;
 
 import com.example.episodicepisodes.EpisodeService;
+import com.example.TestBaseClass;
 import com.example.episodicviewings.ViewingService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
-public class UserControllerTest {
+public class UserControllerTest extends TestBaseClass {
 
 	@Autowired
 	private MockMvc mockMvc;

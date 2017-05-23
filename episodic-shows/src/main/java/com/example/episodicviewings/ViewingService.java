@@ -1,5 +1,7 @@
 package com.example.episodicviewings;
 
+import com.example.MessageEpisodicProgress;
+import com.example.episodicepisodes.Episode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,5 +52,25 @@ public class ViewingService {
     }
     public Long count() {
         return repository.count();
+    }
+
+    public Viewing createViewingFromMessage
+            (MessageEpisodicProgress message,
+             Episode episode) {
+        Viewing viewing = repository.findByUserIdAndShowId(
+                message.getUserId(),
+                episode.getShowId());
+        if (viewing == null) {
+            viewing = new Viewing(
+                    message.getUserId(),
+                    episode.getShowId(),
+                    episode.getId(),
+                    message.getCreatedAt(),
+                    message.getOffset());
+        } else {
+            viewing.setUpdatedAt(message.getCreatedAt());
+            viewing.setTimecode(message.getOffset());
+        }
+        return repository.save(viewing);
     }
 }

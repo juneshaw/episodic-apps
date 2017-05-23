@@ -16,6 +16,19 @@ import java.util.Date;
 @AllArgsConstructor
 public class Viewing {
 
+    public Viewing(
+            Long userId,
+            Long showId,
+            Long episodeId,
+            Date updatedAt,
+            Integer timecode) {
+        this.setUserId(userId);
+        this.setShowId(showId);
+        this.setEpisodeId(episodeId);
+        this.setUpdatedAt(updatedAt);
+        this.setTimecode(timecode);
+    };
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore

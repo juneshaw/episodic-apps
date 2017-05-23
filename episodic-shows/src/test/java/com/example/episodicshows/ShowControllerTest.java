@@ -1,5 +1,6 @@
 package com.example.episodicshows;
 
+import com.example.TestBaseClass;
 import com.example.episodicepisodes.Episode;
 import com.example.episodicepisodes.EpisodeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ShowController.class)
-public class ShowControllerTest {
+public class ShowControllerTest extends TestBaseClass {
 
     @Autowired
     private MockMvc mockMvc;

@@ -1,5 +1,6 @@
 package com.example.episodicviewings;
 
+import com.example.TestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ViewingServiceTest {
+public class ViewingServiceTest extends TestBaseClass {
 
     @Autowired
     ViewingRepository repository;
