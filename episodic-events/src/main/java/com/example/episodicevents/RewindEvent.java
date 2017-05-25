@@ -1,19 +1,23 @@
 package com.example.episodicevents;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class RewindEvent extends Event {
-    private PlayData data;
+    private Data data;
 
 
     @Getter
     @Setter
-    public static class PlayData {
+    @NoArgsConstructor(force = true)
+    @AllArgsConstructor
+    public static class Data {
         private Integer startOffset;
         private Integer endOffset;
         private Double speed;

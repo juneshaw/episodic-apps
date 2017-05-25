@@ -1,5 +1,6 @@
 package com.example.episodicevents;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,13 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProgressEvent extends Event {
-    private PlayData data;
-
+    private Data data;
 
     @Getter
     @Setter
-    public static class PlayData {
+    @NoArgsConstructor(force = true)
+    @AllArgsConstructor
+    public static class Data {
         private Integer offset;
     }
 }

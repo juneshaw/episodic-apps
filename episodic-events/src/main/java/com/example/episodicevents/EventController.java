@@ -1,34 +1,33 @@
 package com.example.episodicevents;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
 public class EventController {
 
-    private final EventRepository repository;
+    private final EventService eventService;
+    private final RabbitTemplate rabbitTemplate;
 
-    public EventController(EventRepository repository) {
-        this.repository = repository;
+    public EventController(EventService eventService,
+                           RabbitTemplate rabbitTemplate) {
+        this.eventService = eventService;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     @GetMapping
     public Iterable<Event> getEvents() {
-        return repository.findAll();
+        return eventService.getEvents();
     }
 
     @GetMapping("/recent")
     public Iterable<Event> getRecentEvents() {
-        return repository.findAll(new PageRequest(
-                0,
-                20,
-                new Sort(Sort.Direction.DESC, "createdAt")));
+        return eventService.getRecentEvents();
     }
 
     @PostMapping
     public Event createEvent(@RequestBody Event event) {
-        return repository.save(event);
+        return eventService.postEvent(event);
     }
 }
