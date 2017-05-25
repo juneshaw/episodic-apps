@@ -1,4 +1,4 @@
-package com.example;
+package com.example.queue;
 
 import com.example.episodicepisodes.Episode;
 import com.example.episodicepisodes.EpisodeService;
@@ -33,8 +33,7 @@ public class AmqpListener implements RabbitListenerConfigurer {
         this.userService = userService;
     }
 
-    @RabbitListener(queues = "episodic-progress")
-//    @Transactional
+    @RabbitListener(queues = "#{'${queue}'}") //(queues = "episodic-progress")//    @Transactional
     public void receiveMessage(final MessageEpisodicProgress message) {
         Episode episode = episodeService.read(message.getEpisodeId());
         User user = userService.readOne(message.getUserId());

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.queue;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

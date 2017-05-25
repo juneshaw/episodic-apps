@@ -1,6 +1,6 @@
 package com.example.episodicviewings;
 
-import com.example.MessageEpisodicProgress;
+import com.example.queue.MessageEpisodicProgress;
 import com.example.episodicepisodes.Episode;
 import org.springframework.stereotype.Service;
 

@@ -4,6 +4,8 @@ import com.example.episodicepisodes.Episode;
 import com.example.episodicepisodes.EpisodeService;
 import com.example.episodicshows.Show;
 import com.example.episodicshows.ShowService;
+import com.example.episodicusers.User;
+import com.example.episodicusers.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,16 +20,20 @@ public class ViewingController {
     private final ViewingService viewingService;
     private final EpisodeService episodeService;
     private final ShowService showService;
+    private final UserService userService;
 
     public ViewingController(ViewingService viewingService,
                              EpisodeService episodeService,
-                             ShowService showService) throws Exception {
+                             ShowService showService,
+                             UserService userService) throws Exception {
         assertNotNull(viewingService);
         assertNotNull(episodeService);
         assertNotNull(showService);
+        assertNotNull(userService);
         this.viewingService = viewingService;
         this.episodeService = episodeService;
         this.showService = showService;
+        this.userService = userService;
     }
 
     @GetMapping("/{viewingId}")
@@ -58,10 +64,15 @@ public class ViewingController {
                               @RequestBody Viewing viewing) throws Exception {
 
         Episode episode = episodeService.read(viewing.getEpisodeId());
-        viewing.setUserId(userId);
-        viewing.setShowId(episode.getShowId());
-        viewing.setEpisodeId(episode.getId());
-        viewingService.update(viewing);
+        User user = userService.readOne(userId);
+        if ((episode == null) || (user == null)) {
+            throw new Exception();
+        } else {
+            viewing.setUserId(userId);
+            viewing.setShowId(episode.getShowId());
+            viewing.setEpisodeId(episode.getId());
+            viewingService.update(viewing);
+        }
     }
 
     @DeleteMapping
