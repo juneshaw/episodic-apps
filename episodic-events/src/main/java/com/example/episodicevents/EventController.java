@@ -17,17 +17,17 @@ public class EventController {
     }
 
     @GetMapping
-    public Iterable<Event> getEvents() {
+    public Iterable<Event> getEvents() throws Exception {
         return eventService.getEvents();
     }
 
     @GetMapping("/recent")
-    public Iterable<Event> getRecentEvents() {
+    public Iterable<Event> getRecentEvents() throws Exception {
         return eventService.getRecentEvents();
     }
 
     @PostMapping
-    public Event createEvent(@RequestBody Event event) {
+    public Event createEvent(@RequestBody Event event) throws Exception {
         return eventService.postEvent(event);
     }
 }

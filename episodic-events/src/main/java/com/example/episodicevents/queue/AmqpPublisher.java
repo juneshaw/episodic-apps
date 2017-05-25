@@ -16,7 +16,7 @@ public class AmqpPublisher {
 
     @Bean
     public TopicExchange appExchange() {
-        return new TopicExchange("my-exchange");
+        return new TopicExchange("episodic-queue");
     }
 
     @Bean
@@ -26,7 +26,7 @@ public class AmqpPublisher {
 
     @Bean
     public Binding declareBinding() {
-        return BindingBuilder.bind(queue()).to(appExchange()).with("my-routing-key");
+        return BindingBuilder.bind(queue()).to(appExchange()).with("episodic-queue");
     }
 
     @Bean

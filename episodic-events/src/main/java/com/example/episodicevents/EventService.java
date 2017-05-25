@@ -32,12 +32,12 @@ public class EventService {
     }
 
     public Event postEvent(@RequestBody Event event) throws Exception {
-        if (event.getType() == "progress") {
+        if (event.getType().equals("progress")) {
             Gson gson = new Gson();
             String json = gson.toJson(event);
             ProgressEvent progressEvent = gson.fromJson(json , ProgressEvent.class);
             MessageEpisodicProgress message = createMessageFromViewing(progressEvent);
-            rabbitTemplate.convertAndSend("my-exchange", "my-routing-key", message);
+            rabbitTemplate.convertAndSend("episodic-queue", "episodic-queue", message);
         }
         return repository.save(event);
     }
